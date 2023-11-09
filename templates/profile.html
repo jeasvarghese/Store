@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Profile Page
+{% endblock %}
+
+{% block content %}
+
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+  <style>
+      /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(130, 106, 251);
+}
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+  margin-top: 30px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form .gender-box {
+  margin-top: 20px;
+}
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+.form .gender {
+  column-gap: 5px;
+}
+.gender input {
+  accent-color: rgb(130, 106, 251);
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(130, 106, 251);
+}
+.form button:hover {
+  background: rgb(88, 56, 250);
+}
+/*Responsive*/
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}
+
+
+.main{
+      display:inline-block;
+      font-size:14px;
+      margin-right:30px;
+
+}
+  </style>
+    <script>
+
+      // Function to update course options based on selected department
+        function updateCourses() {
+            var departmentSelect = document.getElementById("departments");
+            var courseSelect = document.getElementById("courses");
+            var selectedDepartment = departmentSelect.value;
+            courseSelect.innerHTML = '';
+
+            if (selectedDepartment === "IT") {
+                var courseList = ["Web Development", "Software Engineering", "Network Administration"];
+            } else if (selectedDepartment === "Marketing") {
+                var courseList = ["Digital Marketing", "Market Research", "Advertising"];
+            } else if (selectedDepartment === "Finance") {
+                var courseList = ["Accounting", "Investment Banking", "Financial Planning"];
+            }
+
+            // Populate the city dropdown with the appropriate cities
+            courseList.forEach(function (courses) {
+                var option = document.createElement("option");
+                option.value = courses;
+                option.textContent = courses;
+                courseSelect.appendChild(option);
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <section class="container">
+      <header>Profile Form</header>
+      <form action="#" class="form" method="post">
+          {% csrf_token %}
+        <div class="input-box">
+          <label>Full Name</label>
+          <input type="text" placeholder="Enter full name" name="name" required />
+        </div>
+
+        <div class="input-box">
+          <label>Email</label>
+          <input type="text" placeholder="Enter email" name="email" required />
+        </div>
+        <div class="input-box">
+          <label>Address</label>
+          <input type="text" placeholder="Enter address" name="address" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Age</label>
+            <input type="number" placeholder="Enter Your age" name="age" required />
+          </div>
+          <div class="input-box">
+            <label>DOB</label>
+            <input type="date" placeholder="Enter birth date" name="dob" required />
+          </div>
+        </div>
+        <div class="input-box">
+            <label>Phone Number</label>
+            <input type="number" placeholder="Enter phone number" name="phone" required />
+        </div>
+
+        <div class="gender-box">
+          <h3>Gender</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input type="radio" id="check-male" name="gender" checked />
+              <label for="check-male">male</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-female" name="gender" />
+              <label for="check-female">Female</label>
+            </div>
+
+          </div>
+        </div>
+        <br>
+
+        <label for="departments">Department: </label>
+        <select id="departments" name="departments" onchange="updateCourses()">
+            <option value="choose">Choose Department</option>-->
+            <option value="IT">IT</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+        </select><br><br>
+
+
+        <label for="courses">Course: </label>
+        <select id="courses" name="courses">
+            <option value="choose">Choose Course</option>-->
+        </select><br><br>
+
+        <div class="form-group">
+        <label >Purpose</label>
+        <div class="select-box">
+              <select name="purpose">
+                <option value="enquiry">Enquiry</option>
+                <option value="place">Place</option>
+                <option value="return">Return</option>
+              </select>
+            </div>
+        </div>
+          <br>
+        <div class="form-group">
+
+
+          <label >Material Provides</label><br><br>
+          <label class="main">Notebook
+          <input type="checkbox" name="material">
+          </label>
+          <label class="main">Pen
+          <input type="checkbox"name="material">
+          </label>
+          <label class="main">ExamPapers
+          <input type="checkbox" name="material">
+          </label>
+        </div>
+
+
+        <button type="submit" >Submit</button>
+        <br>
+        <br>
+           {% for message in messages %}
+              <p class="fs-2 text-success">{{message}}</p>
+           {% endfor %}
+        <br>
+      <a href="{% url 'collegestore_app:index' %}" class="btn btn-primary">Return to home</a>
+      </form>
+    </section>
+  </body>
+</html>
+
+{%endblock%}
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body style="background-color:pink;background-image:url('https://thumbs.dreamstime.com/b/modern-library-7381643.jpg')";>
+<style>
+<!--.container{padding: 16px;-->
+<!--background-color: white;}-->
+<!--/*full- width input fields*/-->
+<!--input[type=text],input[type=password]{width:100%;-->
+<!--padding: 15px;-->
+<!--margin: 5px 0 22px 0;-->
+<!--display:inline-block;-->
+<!--border:none;-->
+<!--background: #f1f1f1;}-->
+<!--input[type=text]:focus,input[type=password]:focus{background-color:#ddd;-->
+<!--outline:none;}-->
+
+.registerbtn{background-color:aqua;
+color:white;
+font-size:30px;
+padding:16px 20px;
+margin:100px 0;
+border:none;
+cursor:pointer;
+width:100%;
+opacity:0.9;}
+.registerbtn:hover{opacity:1;
+background-color: green;}
+</style>
+
+
+<div class="container">
+ <form>
+    {% csrf_token %}
+
+     <button type="submit" class="registerbtn"><a href="{% url 'collegestore_app:profile' %}">Form</a></button>
+</form>
+</div>
+
+{%endblock%}

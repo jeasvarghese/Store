@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .container{padding: 16px;
+background-color: white;}
+/*full- width input fields*/
+input[type=text],input[type=password]{width:100%;
+padding: 15px;
+margin: 5px 0 22px 0;
+display:inline-block;
+border:none;
+background: #f1f1f1;}
+input[type=text]:focus,input[type=password]:focus{background-color:#ddd;
+outline:none;}
+
+.registerbtn{background-color: #04AA6D;
+color:white;
+padding:16px 20px;
+margin:8px 0;
+border:none;
+cursor:pointer;
+width:100%;
+opacity:0.9;}
+.registerbtn:hover{opacity:1;
+background-color: chartreuse;}
+</style>
+
+<h2>Register Here...</h2>
+<div class="container">
+ <form action="register" method="post">
+    {% csrf_token %}
+     <input type="text" placeholder="Enter Username" name="username"><br>
+     <input type="password" placeholder="Enter Password" name="password"><br>
+     <input type="password" placeholder="Confirm your Password" name="password1"><br>
+     <button type="submit" class="registerbtn">Register</button>
+
+</form>
+</div>
+{% for msg in messages %}
+<h2>{{msg}}</h2>
+{% endfor %}
+
+{%endblock%}
